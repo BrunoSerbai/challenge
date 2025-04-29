@@ -1,0 +1,31 @@
+#!/usr/bin/env node 
+
+import axios from 'axios';
+
+// Get arguments from command line
+const args = process.argv.slice(2);
+const placaIndex = args.indexOf('--placa');
+const volumeIndex = args.indexOf('--volume');
+
+// Validate arguments
+if (placaIndex === -1 || volumeIndex === -1) {
+  console.error('Seu comando falta argumentos. Uso correto: ./ajustar_volume --placa <numero-da-placa> --volume <volume-de-0-a-100>');
+  process.exit(1);
+}
+
+// Extract argument values
+const placa = args[placaIndex + 1];
+const volume = parseInt(args[volumeIndex + 1], 10);
+
+// Send POST request to change volume
+axios.post('http://localhost:3000/api/dispositivos', {
+  placa,
+  volume
+})
+.then(response => {
+  console.log('Volume ajustado com sucesso:', response.data);
+})
+.catch(error => {
+  console.error('Erro ao ajustar volume:', error.response?.data || error.message);
+  process.exit(1);
+});
