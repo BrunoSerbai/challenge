@@ -26,7 +26,7 @@ if (arquivoIndex !== -1) {
     .pipe(csv())
     .on('data', async (row) => {
       try {
-        const response = await axios.post('http://localhost:3000/api/dispositivos', {
+        const response = await axios.post('https://challenge-v3.brunoserbai.org/api/dispositivos', {
           placa: row.placa,
           volume: parseInt(row.volume, 10)
         });
@@ -55,7 +55,7 @@ if (arquivoIndex !== -1) {
     console.log('Formato de placa inválido')
     process.exit(1)
   }
-  else{  axios.post('http://localhost:3000/api/dispositivos', {
+  else{  axios.post('https://challenge-v3.brunoserbai.org/api/dispositivos', {
     placa,
     volume
   })
