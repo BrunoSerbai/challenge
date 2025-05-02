@@ -1,66 +1,97 @@
-<p align="center">
-    <img src="./.github/logo.png" width="200px">
-</p>
+# Ajustar Volume
 
-<h1 align="center" style="font-weight: bold;">Desafio Técnico da V3</h1>
+Este script ajuda a ajustar o volume dos dispositivos de áudio dos veículos. É super fácil de usar e tem duas formas de funcionar:
 
-## ❤️ Bem vindos
+## Como Funciona
 
-Olá, tudo certo?
+1. **Via Arquivo CSV**
+   - Você pode ajustar vários veículos de uma vez usando um arquivo CSV
+   - O arquivo deve ter duas colunas: `placa` e `volume`
+   - O script lê o arquivo e ajusta o volume de cada veículo automaticamente
 
-Seja bem vindo ao teste de seleção para novos colaboradores na V3!
+2. **Para um Veículo Específico**
+   - Você pode ajustar o volume de um veículo individualmente
+   - Basta informar a placa e o volume desejado
 
-Estamos honrados que você tenha chegado até aqui!
+## Como Usar
 
-Prepare aquele ☕️, e venha conosco codar e se divertir!
 
-## 📚 Desafios Disponíveis
+### Usando Arquivo CSV
+```bash
+./ajustar_volume --arquivo seu_arquivo.csv
+```
 
-Este repositório contém três desafios diferentes, cada um focado em uma área específica:
+### Para um Veículo Específico
+```bash
+./ajustar_volume --placa ABC1234 --volume 50
+```
 
-1. [Suporte Técnico](SUPPORT.md)
-2. [Desafio Backend](CLOUD.md)
-3. [Desafio Firmware](FIRMWARE.md)
-   
-## Poxa, outro teste?
+## Instalação e Configuração do Servidor
 
-Nós sabemos que os processos de seleção podem ser ingratos! Você investe um tempão e no final pode não ser aprovado!
+1. **Instalar Dependências**
+```bash
+npm install
+```
 
-Aqui, nós presamos pela **transparência**!
+2. **Configurar Variáveis de Ambiente (opcional)**
+Crie um arquivo `.env` na pasta `backend` com as seguintes variáveis:
+```
+PORT=3000
+```
 
-Este teste tem um **propósito** bastante simples:
+3. **Iniciar o Servidor**
+```bash
+npm start
+```
 
-> Nós queremos avaliar como você consegue transformar problemas em soluções através de código!
+O servidor estará rodando em `http://localhost:3000`.
 
-**🚨 IMPORTANTE!** Se você entende que já possui algum projeto pessoal, ou contribuição em um projeto _open-source_ que contemple conhecimentos equivalentes aos que existem neste desafio, então, basta submeter o repositório explicando essa correlação!
+4. **Parar o Servidor**
+Para parar o servidor, pressione `Ctrl + C` no terminal onde ele está rodando.
 
-## 🚀 Bora nessa!
+**Nota:** O servidor precisa estar rodando para que o script [ajustar_volume](cci:7://file:///home/bruno/Documents/challenge/nivel-4/ajustar_volume:0:0-0:0) possa se comunicar com ele.
 
-Este é um teste para analisarmos como você desempenha ao entender, traduzir, resolver e entregar um código que resolve um problema.
+## O Que Precisa Saber
 
-### Dicas
+- O volume deve ser um número entre 0 e 100
+- A placa deve ser um número válido
+- O script se conecta com um servidor local na porta 3000
+- Se algo der errado, você verá uma mensagem explicando o problema
 
-- Documente seu projeto;
-- Faça perguntas sobre os pontos que não ficaram claros para você;
-- Mostre a sua linha de raciocínio;
-- Trabalhe bem o seu README.md;
-  - Explique até onde implementou;
-  - Como o projeto pode ser executado;
-  - Como pode-se testar o projeto;
+## Exemplo de Arquivo CSV
+```
+placa,volume
+ABC1234,50
+DEF5678,75
+GHI9101,30
+```
 
-### Como você deverá desenvolver?
+## Bibliotecas Usadas
 
-1. Faça um _fork_ deste projeto em seu GitHub pessoal;
-2. Realize as implementações de acordo com cada um dos níveis;
-3. Faça pequenos _commits_;
-4. Depois de sentir que fez o seu máximo, faça um PR para o repositório original.
+O script usa algumas bibliotecas importantes:
 
-🚨 **IMPORTANTE!** Não significa que você precisa implementar **todos os níveis** para ser aprovado no processo! Faça até onde se sentir confortável.
+1. **Axios**
+   - É como um mensageiro que envia as informações para o servidor
+   - Faz a comunicação entre o script e o servidor onde os dispositivos estão configurados
+   Documentacao:https://www.npmjs.com/package/axios
 
-## ⏰ Tempo para Entrega
+2. **fs (File System)**
+   - É o responsável por ler os arquivos do computador
+   - Ajuda o script a ler o arquivo CSV quando você quer ajustar vários veículos de uma vez
 
-Quanto antes você enviar, mais cuidado podemos ter na revisão do seu teste. Faça no seu tempo, mas mantenha a qualidade!
+3. **csv-parser**
+   - Este é o ajudante que transforma o arquivo CSV em informações que o script pode entender
+   - Lê cada linha do arquivo e separa a placa e o volume para cada veículo
+   Documentacao:https://www.npmjs.com/package/csv-parser
+   Documentacao adicional:https://www.digitalocean.com/community/tutorials/how-to-read-and-write-csv-files-in-node-js-using-node-csv
 
-**Mas não desista! Envie até onde conseguir.**
+4. **Morgan**
+   - E um middleware que ajuda a registrar as requisicoes HTTP
+   Documentacao:https://www.npmjs.com/package/morgan
 
-Boa sorte! 🍀
+## Placa de veiculo
+
+A placa de veiculo deve ser um numero valido, ou seja, deve ter 7 caracteres e ser composta por 3 letras e 4 numeros de acordo com o padrao do Brasil. Fonte:https://pt.wikipedia.org/wiki/Placas_de_identifica%C3%A7%C3%A3o_de_ve%C3%ADculos_no_Brasil
+
+Exemplo padrao antigo: ABC1234
+Exemplo Mercosul (novo padrao): ABC1A12
