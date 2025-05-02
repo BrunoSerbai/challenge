@@ -14,7 +14,8 @@
         <label for="volume">Volume:</label>
         <input type="number" id="volume" min="0" max="100" placeholder="Volume: 0-100"><br><br>
         <label for="csv">Arquivo CSV:</label>
-        <input type="file" id="csv" accept=".csv" multiple><br><br>
+        <input type="file" id="csv" accept=".csv" multiple>
+        <button type="button" class="clear-button" onclick="clearCSV()">×</button><br><br>
         <button type="submit">Ajustar Volume</button>
     </form>
     <div id="result"></div>

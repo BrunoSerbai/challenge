@@ -27,3 +27,15 @@ button {
 #result {
     display: none;
 }
+
+.clear-button {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 0;
+    font-size: 12px;
+    cursor: pointer;
+}
